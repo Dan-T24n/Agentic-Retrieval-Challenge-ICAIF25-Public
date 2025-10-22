@@ -1,18 +1,16 @@
 # ACM ICAIF '25 AI Agentic Retrieval Grand Challenge
 
-Agentic system for ranking financial documents and text chunks from SEC filings to answer institutional finance questions.
+Agentic system to extract information from SEC filings to answer finance questions.
 
 ## Competition Tasks
 
-**Document Ranking**: Rank 5 SEC filing types (DEF14A, 10-K, 10-Q, 8-K, Earnings)
+**Document Retrieval**: Rank 5 SEC filing types (DEF14A, 10-K, 10-Q, 8-K, Earnings)
 - Input: Question + 5 fixed document types
 - Output: Ranked list of 5 indices
-- Ground truth: Graded relevance 0-4
 
-**Chunk Ranking**: Select top-5 relevant passages from hundreds of candidates
+**Chunk-text Retrieval**: Select top-5 relevant passages from hundreds of candidates
 - Input: Question + 2-1,304 chunks (avg 169)
 - Output: Ranked list of top-5 chunk indices
-- Ground truth: Graded relevance 0-2
 
 **Metrics**: MRR@5, MAP@5, nDCG@5 (evaluated independently, 200 queries each)
 
@@ -54,20 +52,20 @@ Query: question + ~300 chunks (20K-120K tokens)
 │ Model: gpt-oss-120b (120B) | Hybrid: 70% LLM + 30% BM25                 │
 └─────────────────────────────────────────────────────────────────────────┘
 
-Split into ≤5 parts:        Part 1        Part 2        ...        Part 5
-                           (60 chunks)   (60 chunks)              (60 chunks)
-                               │             │                         │
-Each part scored:         BM25 + LLM    BM25 + LLM    ...        BM25 + LLM
-                               │             │                         │
-Extract top-k:             Top-10        Top-10        ...        Top-10
-                               │             │                         │
-                               └─────────────┴───────────────────────────┘
-                                                 │
-                                     Fuse all parts (RRF)
-                                                 │
-                                        ~50 candidates
-                                                 │
-                                                 ▼
+Split into ≤5 parts:  Part 1        Part 2        ...        Part 5
+                   (60 chunks)   (60 chunks)              (60 chunks)
+                        │             │                         │
+Each part scored:  BM25 + LLM    BM25 + LLM     ...        BM25 + LLM
+                        │             │                         │
+Extract top-k:       Top-10        Top-10        ...        Top-10
+                        │             │                         │
+                        └─────────────┴───────────────────────────┘
+                                            │
+                                   Fuse all parts (RRF)
+                                            │
+                                     ~50 candidates
+                                            │
+                                            ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
 │ STAGE 2: Split Rescore (Balanced)                                       │
 │ Model: gpt-oss-120b (120B) or llama-405b (405B) | Pure LLM + Smart Retry│
