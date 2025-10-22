@@ -1,0 +1,75 @@
+[project]
+name = "agentic-rag-challenge25"
+version = "0.1.0"
+description = "ACM ICAIF '25 AI Agentic Retrieval Grand Challenge - Multi-step agentic retrieval from SEC filings"
+
+readme = "readme.md"
+requires-python = ">=3.12, <3.13"
+
+dependencies = [
+    # Core data science libraries
+    "pandas>=2.1.0",
+    "numpy>=1.24.0",
+    "scipy>=1.11.0",
+    "scikit-learn>=1.3.0",
+    # Machine learning and NLP
+    "transformers>=4.35.0",
+    "sentence-transformers>=2.2.0",
+    "torch>=2.0.0",
+    "datasets>=2.14.0",
+    "tokenizers>=0.15.0",
+    # LlamaIndex framework for agentic retrieval
+    "llama-index>=0.9.0",
+    # API clients and async processing
+    "openai>=1.0.0",
+    "google-generativeai>=0.8.0",
+    "tiktoken>=0.5.0",
+    "pydantic>=2.0.0",
+    "tqdm>=4.65.0",
+    "aiohttp>=3.8.0",
+    "kaggle>=1.6.0",
+    # Environment and configuration
+    "python-dotenv>=1.0.0",
+    # Data processing and formats
+    "pyarrow>=13.0.0",
+    "openpyxl>=3.1.0",
+    "jsonlines>=3.1.0",
+    # Visualization and analysis
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+    "plotly>=5.15.0",
+    # Evaluation metrics for ranking
+    "rank-eval>=0.1.0",
+    # Jupyter and notebook support
+    "jupyterlab>=4.0.0",
+    "ipykernel>=6.25.0",
+    "nbformat>=5.9.0",
+    # Utilities
+    "tabulate>=0.9.0",
+    "joblib>=1.3.0",
+    "psutil>=5.9.0",
+    "google-genai>=1.43.0",
+    "llama-index-llms-openai>=0.6.2",
+    "llama-index-core>=0.14.4",
+    "llama-index-llms-databricks>=0.4.1",
+    "bm25s>=0.2.14",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.json", "*.txt"]
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "pytest>=8.4.0",
+    "pytest-asyncio>=1.2.0",
+    "ruff>=0.12.0",
+]

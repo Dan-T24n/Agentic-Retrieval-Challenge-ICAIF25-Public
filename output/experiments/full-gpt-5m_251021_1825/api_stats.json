@@ -1,0 +1,17 @@
+{
+  "total_calls": 1660,
+  "total_time": 6427.054349184036,
+  "document_calls": 200,
+  "document_time": 457.506893157959,
+  "document_errors": 0,
+  "document_retries": 0,
+  "chunk_calls": 1460,
+  "chunk_time": 5969.547456026077,
+  "chunk_errors": 0,
+  "chunk_retries": 2,
+  "rate_limit_retries": 33,
+  "parsing_retries": 0,
+  "avg_time": 3.871719487460263,
+  "avg_document_time": 2.287534465789795,
+  "avg_chunk_time": 4.088731134264436
+}
